@@ -1,6 +1,9 @@
 ﻿#ifndef _NTDLL_H
 #define _NTDLL_H
 
+#define DllImport extern "C" __declspec( dllimport ) 
+#define DllExport extern "C" __declspec( dllexport )
+
 #pragma once
 
 #ifdef __cplusplus
@@ -1387,6 +1390,10 @@ __pragma(clang diagnostic pop)
     PsAttributeValue(PsAttributeMitigationOptions, FALSE, TRUE, TRUE) // 0x60010
 #define PS_ATTRIBUTE_PROTECTION_LEVEL \
     PsAttributeValue(PsAttributeProtectionLevel, FALSE, TRUE, FALSE) // 0x20011
+#define PS_ATTRIBUTE_MITIGATION_OPTIONS \
+    PsAttributeValue(PsAttributeMitigationOptions, FALSE, TRUE, TRUE)
+#define PS_ATTRIBUTE_MITIGATION_OPTIONS_2 \
+    PsAttributeValue(PsAttributeMitigationOptions, FALSE, TRUE, FALSE)
 
 	typedef enum _PS_STD_HANDLE_STATE
 	{
@@ -2924,6 +2931,8 @@ __pragma(clang diagnostic pop)
 #define NX_SUPPORT_POLICY_ALWAYSON  1
 #define NX_SUPPORT_POLICY_OPTIN     2
 #define NX_SUPPORT_POLICY_OPTOUT    3
+
+#define RTL_USER_PROC_PARAMS_NORMALIZED     0x00000001
 
 #pragma pack(push, 4)
 	typedef struct _KUSER_SHARED_DATA
